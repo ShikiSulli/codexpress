@@ -30,7 +30,7 @@ class AppFixtures extends Fixture
         // Boucle pour créer 200 snippets de test
         for ($i=0; $i < 200; $i++) { 
             $snippet = new Snippet();
-            $snippet->setTitle($faker->word())
+            $snippet->setTitle($faker->word(2))
             ->setContent($faker->text(200))
             ->setUser($user)
             ->setCreatedAt($faker->dateTimeBetween('-7 months'))
