@@ -2,11 +2,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>
-			{% block title %}{% endblock %}
-			• CodeXpress</title>
+		<title>{% block title %}{% endblock %} • CodeXpress</title>
 		<link rel="icon" href={{ asset('images/favicon.png') }}>
 		<link rel="stylesheet" href="https://unpkg.com/papercss@1.9.2/dist/paper.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 		<link rel="stylesheet" href={{ asset('style.css') }}>
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
@@ -20,25 +19,23 @@
 		<div class="row">
 			<img src={{ asset('images/logo-codexpress.svg') }} width="200" alt="CodeXpress Partage de code">
 			<div>
-				<span {{ stimulus_controller('symfony/ux-typed', {
-                    strings: [ 
-                        'I ❤️ Symfony UX!', 
-                        'Symfony UX Typed loves to type', 
-                        'Symfony UX Typed and backspace', 
-                        'Control the speed', 
-                        'Control the cursor', 
-                        'Control your destiny!!!', 
-                        'Control your destiny... sort of', ], 
-                        loop: true, 
-                        showCursor: true, 
-                        cursorChar: '✨', 
-                        })
-                    }}>
-                </span>
+				Exemple de phrase
+				<span {{ stimulus_controller('symfony/ux-typed', { strings: [
+                    'coucou',
+                    'hello',
+                    'it works',], 
+                    loop: true, 
+                    showCursor: true, 
+                    cursorChar: '|', })
+                }}></span>
 			</div>
 		</div>
-		<div class="container"> {% block body %}{% endblock %}
-			</div>
-			<script src={{ asset('main.js') }}></script>
+		<div class="container animate__animated animate__fadeIn">
+            {% block body %}{% endblock %}
+		</div>
+        <footer>
+            &copy; {{ 'now'|date('Y') }} CodeXpress - <a href={{ path('app_logout')}}>Déconnexion</a>
+        </footer>
+		<script src={{ asset('main.js') }}></script>
 		</body>
 	</html>
