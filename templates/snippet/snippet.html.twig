@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ snippet.user.username }} - {{ snippet.id }}
+{% endblock %}
+
+{% block body %}
+	<article class="article">
+		<h1 class="article-title">
+			{{ snippet.title }}
+		</h1>
+		<p class="article-meta">
+            Créer le : {{ snippet.createdAt|date('d/m/Y') }}
+            <br>
+            {% if snippet.editedAt %}
+                 - Modifié le : {{ snippet.editedAt|date('d/m/Y') }} 
+            {% endif %}
+		</p>
+		<pre class="text-lead">
+            <code>{{ snippet.content|raw }}</code>
+		</pre>
+
+		<p>Rédigé par <kbd>{{ snippet.user.username }}</kbd></p>
+        <p>
+            Statut : 
+            {% if snippet.isPublic == true %}
+                <span class="green-pill">Public</span>
+            {% else %}
+                <span class="yellow-pill">Privé</span>
+            {% endif %}
+        </p>
+	</article>
+{% endblock %}
