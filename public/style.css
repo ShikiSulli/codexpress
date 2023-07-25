@@ -1,0 +1,10 @@
+.green-pill, .yellow-pill {
+    border-radius: 50px;
+    color: #000000;
+}
+.green-pill {
+    background-color: #22dd22;
+}
+.yellow-pill {
+    background-color: #f5ee28;
+}
