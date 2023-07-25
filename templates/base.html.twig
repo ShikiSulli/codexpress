@@ -19,7 +19,9 @@
 	</head>
 	<body>
 		<nav>
-			<img src={{ asset('images/logo-codexpress.svg') }} width="300" alt="CodeXpress Partage de code">
+			<a href={{ path('app_page') }}>
+				<img src={{ asset('images/logo-codexpress.svg') }} width="300" alt="CodeXpress Partage de code">
+			</a>
 			<div>
 				Avec CodeXpress, partagez votre code 
 				<span {{ stimulus_controller('symfony/ux-typed', { strings: [ 'en toute simplicité !', 'avec une communauté.', 'vous même.',], loop: true, showCursor: true, cursorChar: '|', } ) }}></span>

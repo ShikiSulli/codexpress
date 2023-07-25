@@ -14,6 +14,14 @@ nav, .heading {
     flex-direction: column;
     align-items: center;
 }
+nav a {
+    text-decoration: none;
+    border: inherit;
+}
+nav a:hover {
+    text-decoration: none;
+    border: inherit;
+}
 nav img {
     border: 0;
     margin: 1rem;

@@ -21,7 +21,7 @@ class PageController extends AbstractController
     {
         // On créer une requête pour récupérer les snippets
         $query = $snippets->findBy(
-            ['isPublished' => true], // Pour sélectionner
+            ['isPublished' => true, 'isPublic' => true], // Pour sélectionner les snippets publics
             ['createdAt' => 'DESC'], // Pour trier
             100 // Pour limiter l'affichage
         );
@@ -30,7 +30,7 @@ class PageController extends AbstractController
         $pagination = $paginator->paginate(
             $query, // Requête contenant les données à paginer
             $request->query->getInt('page', 1), // Numéro de la page en cours, 1 par défaut
-            10 // Nombre de résultats par page
+            9 // Nombre de résultats par page
         );
         
         return $this->render('page/index.html.twig', [

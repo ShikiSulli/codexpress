@@ -16,8 +16,8 @@
                  - Modifié le : {{ snippet.editedAt|date('d/m/Y') }} 
             {% endif %}
 		</p>
-		<pre class="text-lead">
-            <code>{{ snippet.content|raw }}</code>
+		<pre>
+            <code>{{ snippet.content }}</code>
 		</pre>
 
 		<p>Rédigé par <kbd>{{ snippet.user.username }}</kbd></p>
