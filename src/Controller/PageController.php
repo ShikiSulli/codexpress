@@ -21,7 +21,7 @@ class PageController extends AbstractController
     {
         // On créer une requête pour récupérer les snippets
         $query = $snippets->findBy(
-            ['isPublished' => true, 'isPublic' => true], // Pour sélectionner les snippets publics
+            ['isPublished' => true, 'isPublic' => true], // Pour sélectionner les snippets publics et publiés
             ['createdAt' => 'DESC'], // Pour trier
             100 // Pour limiter l'affichage
         );
