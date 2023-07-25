@@ -1,22 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tableau de bord{% endblock %}
+{% block title %}Tableau de bord
+{% endblock %}
 
 {% block body %}
-
-{# {{ dump(snippets) }} #}
-
-{% for item in snippets %}
-    <div>
-        <h5>{{ item.title}}</h5>
-        <p>{{ item.content|slice(0,20) }}</p>
-        <a href="#">Voir</a>
-    </div>
-    <hr>
-{% endfor %}
-
-<div class="navigation">
-    {{ knp_pagination_render(snippets) }}
+{{ dump(snippets) }}
+<div class="container-lg">
+	{% for item in snippets %}
+		<div class="card col-4 col">
+			<div class="card-body">
+				<h4 class="card-title">{{ item.title }}</h4>
+				<h5 class="card-subtitle">{{ item.user.username }}</h5>
+				<p class="card-text">{{ item.content|slice(0,80) }}</p>
+				<p class="card-text">{{ item.createdAt|date('d/m/Y') }}</p>
+				<a class="card-link" href={{ path('show_code', { id: item.id }) }}>Voir</a>
+			</div>
+		</div>
+	{% endfor %}
 </div>
+	<div class="navigation">
+		{{ knp_pagination_render(snippets) }}
+	</div>
 
 {% endblock %}
