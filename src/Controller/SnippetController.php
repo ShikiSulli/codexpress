@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Snippet;
+use App\Form\SnippetAIType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,8 +17,10 @@ class SnippetController extends AbstractController
         Request $request,
     ): Response
     {
+        $form = $this->createForm(SnippetAIType::class);
         return $this->render('snippet/snippet.html.twig', [
             'snippet' => $snippet,
+            'SnippetAI' => $form,
         ]);
     }
 }
