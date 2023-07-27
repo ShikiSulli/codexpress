@@ -43,7 +43,7 @@ class PageController extends AbstractController
     public function openai()
     {
         // On va initialiser la clé API
-        $yourApiKey = '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';
+        $yourApiKey = '';
 
         // On va initialiser le client
         $client = OpenAI::client($yourApiKey);
