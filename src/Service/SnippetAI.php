@@ -6,9 +6,9 @@ use OpenAI;
 
 class SnippetAI
 {
-    public function explain($snippet) {
+    public static function explain($snippet) {
         // On va initialiser la clé API
-        $yourApiKey = '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';
+        $yourApiKey = '';
 
         // On initialise le client
         $client = OpenAI::client($yourApiKey);
@@ -21,7 +21,7 @@ class SnippetAI
             'model' => 'gpt-3.5-turbo-16k',
             'messages' => [
                 // On concatène le préprompt et le snippet qui est passé en paramètre
-                ['role' => 'user', 'content' => $prePrompt . $snippet,],
+                ['role' => 'user', 'content' => $prePrompt . $snippet['code']],
             ],
         ]);
 
