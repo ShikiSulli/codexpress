@@ -26,18 +26,19 @@ class SnippetController extends AbstractController
             // On le code pour l'envoyer à l'IA
             $data = $form->getData('code');
             // On envoie les données à l'IA et elle renvoie une explication
-            SnippetAI::explain($data);
+            $explication = SnippetAI::explain($data);
             // On affiche le résultat dans le template twig
             return $this->render('snippet/snippet.html.twig', [
                 'snippet' => $snippet,
                 'SnippetAI' => $form,
-                'Explication' => $data, // Cette variable contient la réponse de l'IA
+                'Explication' => $explication, // Cette variable contient la réponse de l'IA
             ]);
         }
 
         return $this->render('snippet/snippet.html.twig', [
             'snippet' => $snippet,
             'SnippetAI' => $form,
+            'Explication' => '',
         ]);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use OpenAI;
+use App\Service\SnippetAI;
 use App\Repository\SnippetRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,26 +42,6 @@ class PageController extends AbstractController
     #[Route('/test', name: 'test')]
     public function openai()
     {
-        // On va initialiser la clé API
-        $yourApiKey = '';
-
-        // On va initialiser le client
-        $client = OpenAI::client($yourApiKey);
-
-        $prePrompt = 'Tu agis comme un assistant d\'aide à la programmation pour une application appelée CodeXpress. Les utilisateurs disposent d\'une fonction permettant de comprendre le code d\'une page. Réponds en commençant toujours par "Le code suivant signifie :". Voici le code à expliquer : '; 
-
-        // On va créer une requête et récupérer le résultat
-        $result = $client->chat()->create([
-            'model' => 'gpt-3.5-turbo-16k',
-            'messages' => [
-                [
-                    'role' => 'user',
-                    'content' => $prePrompt . '<img src="./image.png" alt="Image du code" />'
-                ],
-            ],
-        ]);
-
-        // On affiche le résultat
-        dd($result['choices'][0]['message']['content']);
+        
     }
 }

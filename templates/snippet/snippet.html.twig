@@ -45,5 +45,9 @@
             {{ form_end(SnippetAI) }}
         </div>
 
+        {% if Explication %}
+            <p>{{ Explication }}</p>
+        {% endif %}
+
 	</article>
 {% endblock %}
