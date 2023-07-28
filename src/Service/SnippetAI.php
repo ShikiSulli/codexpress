@@ -8,7 +8,7 @@ class SnippetAI
 {
     public static function explain($snippet) {
         // On va initialiser la clé API
-        $yourApiKey = '';
+        $yourApiKey = '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';
 
         // On initialise le client
         $client = OpenAI::client($yourApiKey);

@@ -40,6 +40,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\Column]
+    private ?bool $isPremium = false;
+
     public function __construct()
     {
         $this->snippets = new ArrayCollection();
@@ -165,6 +168,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function isIsPremium(): ?bool
+    {
+        return $this->isPremium;
+    }
+
+    public function setIsPremium(bool $isPremium): static
+    {
+        $this->isPremium = $isPremium;
 
         return $this;
     }

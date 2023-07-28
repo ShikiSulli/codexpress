@@ -36,6 +36,9 @@ class Snippet
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column]
+    private ?bool $isPremium = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +124,18 @@ class Snippet
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function isIsPremium(): ?bool
+    {
+        return $this->isPremium;
+    }
+
+    public function setIsPremium(bool $isPremium): static
+    {
+        $this->isPremium = $isPremium;
 
         return $this;
     }
