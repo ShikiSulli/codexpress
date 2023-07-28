@@ -7,6 +7,7 @@ use App\Entity\Snippet;
 use Symfony\UX\Chartjs\Model\Chart;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
@@ -14,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
+    // On importe la classe ChartBuilderInterface dans une propriété
     private ChartBuilderInterface $chartBuilder;
 
     public function __construct(ChartBuilderInterface $chartBuilder)
@@ -21,6 +23,7 @@ class DashboardController extends AbstractDashboardController
         $this->chartBuilder = $chartBuilder;
     }
 
+    // On crée une méthode pour créer le graphique
     private function createChart(): Chart
     {
         $chart = $this->chartBuilder->createChart(Chart::TYPE_LINE);
@@ -46,6 +49,17 @@ class DashboardController extends AbstractDashboardController
         return $chart;
     }
 
+    // On charge les assets de Webpack Encore dans le dashboard
+    public function configureAssets(): Assets
+    {
+        $assets = parent::configureAssets();
+
+        $assets->addWebpackEncoreEntry('app');
+
+        return $assets;
+    }
+
+    // Route pour le dashboard et on y passe le graphique $chart
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
@@ -59,12 +73,14 @@ class DashboardController extends AbstractDashboardController
         ]);
     }
 
+    // On configure le dashboard
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
             ->setTitle('<img src="/images/logo-codexpress.svg" width="300" alt="CodeXpress Partage de code">');
     }
 
+    // On configure le menu
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');

@@ -26,6 +26,9 @@
 				Avec CodeXpress, partagez votre code 
 				<span {{ stimulus_controller('symfony/ux-typed', { strings: [ 'en toute simplicité !', 'avec une communauté.', 'vous même.',], loop: true, showCursor: true, cursorChar: '|', } ) }}></span>
 			</div>
+			{% if is_granted('ROLE_ADMIN') %}
+				<a class="green-pill" href={{ path('admin')}}>Administration de l'application</a>
+			{% endif %}
 		</nav>
 		<div class="container animate__animated animate__fadeIn"> {% block body %}{% endblock %}
 			</div>
