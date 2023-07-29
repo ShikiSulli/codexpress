@@ -15,21 +15,33 @@ class AppFixtures extends Fixture
         // Création d'un générateur de données Faker en français
         $faker = Factory::create('fr_FR');
 
-        // Création d'un utilisateur de test
+        // Création d'un utilisateur ADMIN
         $user = new User();
         $user->setEmail('hello@codexpress.fr')
-        ->setUsername('codexpress')
+        ->setUsername('admin')
         ->setPassword('$2y$13$4UbZtgjJ2J0JSmY45CZs4uGbUbckq1R.N64JltRbz7JTVpuo3YJzi') // mdp : admin
         ->setRoles(["ROLE_ADMIN"])
         ->setIsVerified(true)
         ;
-
-        // Enregistrement de l'utilisateur en base de données
+        
+        // Enregistrement de l'utilisateur ADMIN en base de données
         $manager->persist($user);
+
+        // Création d'un utilisateur USER
+        $user2 = new User();
+        $user2->setEmail('user@codexpress.fr')
+        ->setUsername('user')
+        ->setPassword('$2y$13$4UbZtgjJ2J0JSmY45CZs4uGbUbckq1R.N64JltRbz7JTVpuo3YJzi') // mdp : admin
+        ->setRoles(["ROLE_USER"])
+        ->setIsVerified(true)
+        ;
+
+        // Enregistrement de l'utilisateur USER en base de données
+        $manager->persist($user2);
 
         $snippetContent = '
         <h1>Mon premier snippet</h1>
-        <p>Voici mon premier snippet créé avec Cod\'Express !</p>
+        <p>Voici mon premier snippet créé avec CodeXpress !</p>
         <p>Vous pouvez le modifier ou le supprimer depuis votre espace membre.</p>
         <p>Vous pouvez également le partager avec le lien généré.</p>
         ';
@@ -45,6 +57,7 @@ class AppFixtures extends Fixture
             ->setCreatedAt($faker->dateTimeBetween('-7 months'))
             ->setIsPublished($randomBoolean[array_rand($randomBoolean)])
             ->setIsPublic($randomBoolean[array_rand($randomBoolean)])
+            ->setIsPremium($randomBoolean[array_rand($randomBoolean)])
             ;
 
             $manager->persist($snippet);

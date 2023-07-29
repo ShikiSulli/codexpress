@@ -4,6 +4,15 @@
 {% endblock %}
 
 {% block body %}
+{# Récupération des messages flash #}
+{% for label, messages in app.flashes %}
+	{% for message in messages %}
+		<div class="alert alert-{{ label }}">
+			{{ message }}
+		</div>
+	{% endfor %}
+{% endfor %}
+
 <div class="row">
 	{% for item in snippets %}
 		<div class="card col-4 col">

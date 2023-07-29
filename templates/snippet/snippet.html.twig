@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ snippet.user.username }} - {{ snippet.id }}
+    {{ snippet.user.username }} - {{ snippet.title }}
 {% endblock %}
 
 {% block body %}
@@ -17,6 +17,10 @@
             {% else %}
                 <span class="yellow-pill">Privé</span>
             {% endif %}
+            {% if snippet.isPremium == true %}
+                | <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#3b4142" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45L7.77 18l1.12-4.81l-3.73-3.23l4.92-.42L12 5l1.92 4.53l4.92.42l-3.73 3.23L16.23 18z"/></svg>
+                 <span>Premium</span>
+            {% endif %}
         </p>
 		<p class="article-meta">
             Créer le : {{ snippet.createdAt|date('d/m/Y') }}
@@ -26,7 +30,16 @@
             {% endif %}
 		</p>
 		<pre>
-            <code>{{ snippet.content }}</code>
+            {% if snippet.isPremium == false %}
+                <code>{{ snippet.content }}</code>
+            {% else %}
+                {# On vérifie que l'utilisateur est Premium #}
+                {% if is_granted('ROLE_PREMIUM') %}
+                    <code>{{ snippet.content }}</code>
+                {% else %}
+                    <p>Le contenu de ce snippet est réservé aux membres Premium. Abonnez-vous pour accèder aux snippets premium pour 10€ par mois. <a href={{ path('app_payment') }}>Je m'abonne ici</a></p>
+                {% endif %}
+            {% endif %}
 		</pre>
 
         <div class="">
@@ -37,6 +50,7 @@
                     de la variable snippet.content
                 #}
                 {{ form_row(SnippetAI.code, {
+                    'label' : ' ',
                     'attr' : { 
                         'hidden' : true,
                         'value' : snippet.content,
