@@ -8,13 +8,13 @@ class SnippetAI
 {
     public static function explain($snippet) {
         // On va initialiser la clé API
-        $yourApiKey = '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';
+        $yourApiKey = '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';
 
         // On initialise le client
         $client = OpenAI::client($yourApiKey);
 
         // On initialise le préprompt
-        $prePrompt = 'Tu agis comme un assistant d\'aide à la programmation pour une application appelée CodeXpress. Les utilisateurs disposent d\'une fonction permettant de comprendre le code d\'une page. Réponds en commençant toujours par "Le code suivant signifie :". Voici le code à expliquer : '; 
+        $prePrompt = 'Tu agis comme un assistant d\'aide à la programmation pour une application appelée CodeXpress. Les utilisateurs disposent d\'une fonction permettant de comprendre le code d\'une page. Réponds en commençant toujours par la phrase "Le SUUUUUUPPEEER code suivant BAKAYARO signifie :". Voici le code à expliquer : '; 
         
         // On va créer une requête et récupérer le résultat
         $result = $client->chat()->create([
